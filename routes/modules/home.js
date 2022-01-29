@@ -7,13 +7,13 @@ const Category = require('../../models/category')
 router.get('/', (req, res) => {
     const categoryNames = []
     const recordsInfo = []
+    const categorySortName = req.query.category_bar || '類別'
     Category.find()
         .lean()
         .then(categories => {
             categories.filter(category => {
                 categoryNames.push(category.name)
             })
-
             Record.find()
                 .populate('categoryId')
                 .sort({ date: 'asc', id: 'asc' })
@@ -21,14 +21,17 @@ router.get('/', (req, res) => {
                 .then(records => {
                     let totalAmount = 0
                     records.filter(record => {
-                        totalAmount += Number(record.amount)
-                        console.log(record)
-                        // recordsInfo.push({
-                        //     name: record.name,
-                        //     date: record.date,
-                        //     amount: record.amount,
-                        //     icon: record.categoryId.icon
-                        // })
+                        if ((categorySortName === '類別') || (categorySortName === record.categoryId.name)) {
+                            totalAmount += Number(record.amount)
+                            recordsInfo.push({
+                                name: record.name,
+                                date: record.date,
+                                amount: record.amount,
+                                icon: record.categoryId.icon
+                            })
+                        }
+
+
                         // Category.findOne({ id: record.categoryId })
                         //     .lean()
                         //     .then(category => recordsInfo.push({
@@ -39,8 +42,7 @@ router.get('/', (req, res) => {
                         //     }))
 
                     })
-                    console.log(recordsInfo)
-                    res.render('index', { categories: categoryNames, records: recordsInfo, totalAmount })
+                    res.render('index', { categories: categoryNames, records: recordsInfo, totalAmount, category: categorySortName })
                 })
                 .catch(err => console.log(err))
         })
@@ -74,3 +76,5 @@ router.get('/', (req, res) => {
 })
 
 module.exports = router
+
+

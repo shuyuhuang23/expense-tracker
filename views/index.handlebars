@@ -1,15 +1,34 @@
 <div class="container">
 
-    <div class="d-flex justify-content-center align-items-center">
-        <select class="custom-select" style=" width:100%;">
-            {{!-- <select class="form-control form-control-sm" style=" width:100%;"> --}}
-                <option selected>類別</option>
+    <form action="/">
+        <div class="d-flex justify-content-between align-items-center">
+            {{!-- <select class="selectpicker" name="selectpicker" style="width:100%;"> --}}
+                <div class="col-10">
+                    <select class="form-control form-control-sm" name="category_bar" style=" width:100%;">
+                        <option>類別</option>
+                        {{#each categories}}
+                        <option>{{ this }}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-outline-secondary btn-sm  btn-block">搜尋</button>
+        </div>
+    </form>
+
+
+
+    {{!-- <form action="/" method="GET">
+        <div class="form-group ml-2 mb-5 col-sm-6 mr-auto ml-auto">
+            <select class="form-control" id="sort-bar" name="categoryId">
+                <option value="">全部</option>
                 {{#each categories}}
-                <option>{{ this }}</option>
+                <option value="{{this._id}}" {{#if this.isSelected}}selected{{/if}}>{{this.name}}</option>
                 {{/each}}
             </select>
-    </div>
+        </div>
 
+        <button id="submit-button" type="submit" class="d-none">submit</button>
+    </form> --}}
 
 
     <div class="d-flex justify-content-center m-3 align-items-center">
@@ -25,7 +44,8 @@
         <li class="list-group-item">
             <div class="row align-items-center h-100">
                 <div class="col-12 col-md-1">
-                    <i class="fas fa-home fa-2x"></i>
+                    {{!-- <i class="fas fa-home fa-2x"></i> --}}
+                    <i class="{{ this.icon }} fa-2x"></i>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="category">{{ this.name }}</div>

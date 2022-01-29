@@ -1,5 +1,6 @@
 const express = require('express')
 const { engine } = require('express-handlebars')
+const bodyParser = require('body-parser')
 const routes = require('./routes')
 
 const Record = require('./models/record')
@@ -11,6 +12,7 @@ require('./config/mongoose')
 const app = express()
 const port = 3000
 
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(routes)
 
 // express template engine
