@@ -33,9 +33,14 @@ i.fas {
     color: Dodgerblue;
 }
 
-.form-group.required .control-label:after { 
+/* .form-group.required .control-label:after { 
     color: #d00;
     content: "*";
+} */
+
+span.required {
+    color: red;
+    font-size: 90%;
 }
 /* div {
     border: solid;

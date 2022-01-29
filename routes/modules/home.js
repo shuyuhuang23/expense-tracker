@@ -24,6 +24,7 @@ router.get('/', (req, res) => {
                         if ((categorySortName === '類別') || (categorySortName === record.categoryId.name)) {
                             totalAmount += Number(record.amount)
                             recordsInfo.push({
+                                id: record._id,
                                 name: record.name,
                                 date: record.date,
                                 amount: record.amount,

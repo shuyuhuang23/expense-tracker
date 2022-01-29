@@ -2,20 +2,22 @@
     <form action="/records" method="POST">
 
         <div class="row align-items-center h-100 mt-3">
-            <div>*必填欄位</div>
+            <div>
+                <span class="required">*</span>必填欄位
+            </div>
             <div class="col-4"></div>
-            <div>請輸入你的支出</div>
+            <div><b>請輸入你的支出</b></div>
         </div>
 
         <div class="row align-items-center h-100 justify-content-between mt-3">
-            <label for="name">名稱*:</label>
+            <label for="name">名稱<span class="required">*</span>:</label>
             <div class="col-11">
-                <input type="text" name="name" class="form-control" id="name" required>
+                <input type="text" name="name" class="form-control" id="name" value="{{name}}" required>
             </div>
         </div>
 
         <div class="row align-items-center h-100 justify-content-between mt-3">
-            <label for="date">日期*:</label>
+            <label for="date">日期<span class="required">*</span>:</label>
             <div class="col-11">
                 <input type="date" class="form-control" id="date" name="date" value="{{date}}" placeholder="支出日期"
                     size="5">
@@ -23,23 +25,29 @@
         </div>
 
         <div class="row align-items-center h-100 justify-content-between mt-3">
-            <label for="category">類別*:</label>
+            <label for="category">類別<span class="required">*</span>:</label>
             <div class="col-11">
                 {{!-- <select class="form-control form-control-sm" style=" width:100%;" placeholder="類別"> --}}
-                    <select class="custom-select" style=" width:100%;">
+                    <select id="category" name="category" class="custom-select" style=" width:100%;">
                         <option selected>類別</option>
-                        <option>Small select</option>
-                        <option>Small select</option>
-                        <option>Small select</option>
+                        {{#each categories}}
+                        <option>{{ this }}</option>
+                        {{/each}}
                     </select>
             </div>
         </div>
 
         <div class="row align-items-center h-100 justify-content-between mt-3">
-            <label for="amount">金額*:</label>
+            <label for="amount">金額<span class="required">*</span>:</label>
             <div class="col-11">
-                <input type="text" class="form-control" id="amount" name="amount" value="{{date}}">
+                <input type="text" class="form-control" id="amount" name="amount" value="{{amount}}">
             </div>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            {{!-- <a href="/records/{{ restaurant._id }}/edit"> --}}
+                <button type="submit" class="btn btn-warning btn-sm m-1 btn-block">新增支出</button>
+                {{!-- </a> --}}
         </div>
 
     </form>
