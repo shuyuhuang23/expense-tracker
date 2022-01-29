@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {{!--
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css"> --}}
+
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
+    <title>Record Tracker</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                {{!-- <img
+                    src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+                    width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單"> --}}
+                <b>家庭記帳本</b>
+            </a>
+            {{#if isAuthenticated}}
+            <a href="/users/logout" class="btn btn-outline-primary">登出</a>
+            {{else}}
+            <a href="/users/login" class="btn btn-outline-primary">登入</a>
+            {{/if}}
+        </div>
+    </nav>
+
+    {{!-- <div class="banner"></div> --}}
+    <!--- partial template --->
+    <div class="container mt-5 w-50">
+        {{{ body }}}
+    </div>
+    <!--- include javascript files here --->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"><script>
+        </body>
+
+</html >

@@ -1,0 +1,133 @@
+<div class="container">
+
+    <div class="d-flex justify-content-center align-items-center">
+        <select class="custom-select" style=" width:100%;">
+            {{!-- <select class="form-control form-control-sm" style=" width:100%;"> --}}
+                <option selected>類別</option>
+                {{#each categories}}
+                <option>{{ this }}</option>
+                {{/each}}
+            </select>
+    </div>
+
+
+
+    <div class="d-flex justify-content-center m-3 align-items-center">
+        <div>總金額：</div>
+        <div class="total-amount">
+            {{ totalAmount }}
+        </div>
+    </div>
+
+    {{#each records}}
+    <ul class="list-group list-group-flush w-100">
+        {{!-- <li class="list-group-item" style="background-color:#F0F0F0;"> --}}
+        <li class="list-group-item">
+            <div class="row align-items-center h-100">
+                <div class="col-12 col-md-1">
+                    <i class="fas fa-home fa-2x"></i>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="category">{{ this.name }}</div>
+                    <div class="date">{{ this.date }}</div>
+                </div>
+                <div class="amount col-12 col-md-2 text-right">
+                    {{ this.amount }}
+                </div>
+                <div class="col-12 col-md-1"></div>
+                <div class="row">
+                    <a href="/restaurants/{{ restaurant._id }}/edit">
+                        <button type="submit" class="btn btn-outline-success btn-sm m-1">修改</button>
+                    </a>
+
+                    <a href="/">
+                        <button type="button" class="btn btn-outline-danger btn-sm m-1">刪除</button>
+                    </a>
+                </div>
+            </div>
+
+        </li>
+        {{/each}}
+
+
+        {{!-- <li class="list-group-item">
+            <div class="row align-items-center h-100">
+                <div class="col-12 col-md-1">
+                    <i class="fas fa-home fa-2x"></i>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="category">午餐xxxg6u0 </div>
+                    <div class="date">2020-01-01</div>
+                </div>
+                <div class="amount col-12 col-md-5 text-right">
+                    301200
+                </div>
+                <div class="col-12 col-md-1"></div>
+                <div class="row">
+                    <a href="/restaurants/{{ restaurant._id }}/edit">
+                        <button type="submit" class="btn btn-outline-success btn-sm m-1">修改</button>
+                    </a>
+                    <a href="/">
+                        <button type="button" class="btn btn-outline-danger btn-sm m-1">刪除</button>
+                    </a>
+                </div>
+            </div>
+        </li> --}}
+
+        {{!-- <li class="list-group-item" style="background-color:#F0F0F0;">
+            <div class="row align-items-center h-100">
+                <div class="col-12 col-md-1">
+                    <i class="fas fa-home fa-2x"></i>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="category">午餐xxxg6u0 </div>
+                    <div class="date">2020-01-01</div>
+                </div>
+                <div class="amount col-12 col-md-5 text-right">
+                    301200
+                </div>
+                <div class="col-12 col-md-1"></div>
+                <div class="row">
+                    <a href="/restaurants/{{ restaurant._id }}/edit">
+                        <button type="submit" class="btn btn-outline-success btn-sm m-1">修改</button>
+                    </a>
+                    <a href="/">
+                        <button type="button" class="btn btn-outline-danger btn-sm m-1">刪除</button>
+                    </a>
+                </div>
+            </div>
+        </li> --}}
+
+
+        {{!-- <li class="list-group-item">
+            <div class="row align-items-center h-100">
+                <div class="col-12 col-md-1">
+                    <i class="fas fa-home fa-2x"></i>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="category">午餐xxxg6u0 </div>
+                    <div class="date">2020-01-01</div>
+                </div>
+                <div class="amount col-12 col-md-5 text-right">
+                    301200
+                </div>
+                <div class="col-12 col-md-1"></div>
+                <div class="row">
+                    <a href="/restaurants/{{ restaurant._id }}/edit">
+                        <button type="submit" class="btn btn-outline-success btn-sm m-1">修改</button>
+                    </a>
+                    <a href="/">
+                        <button type="button" class="btn btn-outline-danger btn-sm m-1">刪除</button>
+                    </a>
+                </div>
+            </div>
+        </li> --}}
+    </ul>
+
+    <div class="row justify-content-center mt-3">
+        <a href="/restaurants/{{ restaurant._id }}/edit">
+            <button type="submit" class="btn btn-warning btn-sm m-1 btn-block">新增支出</button>
+        </a>
+    </div>
+
+</div>

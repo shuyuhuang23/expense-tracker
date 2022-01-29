@@ -1,0 +1,50 @@
+.form-control {
+    min-width: 0;
+    width: auto;
+    /* width: 100px; */
+    display: inline;
+    /* margin: 10; */
+    margin: 5;
+}
+
+
+div.total-amount {
+    color:orange;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+div.category {
+    /* font-size: large; */
+    margin-left: 10px;
+}
+
+div.date {
+    font-size: x-small;
+    margin-left: 10px;
+}
+
+div.amount {
+    /* margin-left: 20px; */
+    justify-content: center;
+}
+
+i.fas {
+    color: Dodgerblue;
+}
+
+.form-group.required .control-label:after { 
+    color: #d00;
+    content: "*";
+}
+/* div {
+    border: solid;
+} */
+
+
+/* li:nth-child(odd){
+    background-color: #F0F0F0;
+}
+li:nth-child(even){
+    background-color: blue;
+} */
