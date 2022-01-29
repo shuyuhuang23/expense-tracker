@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
             })
             Record.find()
                 .populate('categoryId')
-                .sort({ date: 'asc', id: 'asc' })
+                .sort({ date: 'desc', id: 'asc' })
                 .lean()
                 .then(records => {
                     let totalAmount = 0

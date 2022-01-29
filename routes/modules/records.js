@@ -101,7 +101,6 @@ router.put('/:record_id', (req, res) => {
                     record.categoryId = category._id
                     return record.save()
                 })
-
         })
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
