@@ -60,9 +60,9 @@
                         <button type="submit" class="btn btn-outline-success btn-sm m-1">修改</button>
                     </a>
 
-                    <a href="/">
-                        <button type="button" class="btn btn-outline-danger btn-sm m-1">刪除</button>
-                    </a>
+                    <form action="/records/{{ this.id }}?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-outline-danger btn-sm m-1">刪除</button>
+                    </form>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@ const router = express.Router()
 
 const Record = require('../../models/record')
 const Category = require('../../models/category')
+const recordScehma = require('../../models/record')
 
 router.get('/new', (req, res) => {
     const categoryInfo = []
@@ -88,6 +89,8 @@ router.get('/:record_id/edit', (req, res) => {
 
 router.put('/:record_id', (req, res) => {
     const recordId = req.params.record_id
+
+    //TODO: 檢查金額是否為數字
     Record.findOne({ _id: recordId })
         .then(record => {
             record.name = req.body.name
@@ -103,6 +106,15 @@ router.put('/:record_id', (req, res) => {
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
 
+})
+
+router.delete('/:record_id', (req, res) => {
+    const recordId = req.params.record_id
+    console.log(recordId)
+    return Record.findOne({ _id: recordId })
+        .then(record => record.remove())
+        .then(() => res.redirect('/'))
+        .catch(err => console.log(err))
 })
 
 module.exports = router
