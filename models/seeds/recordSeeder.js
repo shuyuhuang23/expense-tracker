@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+
 const User = require('../user')
 const Record = require('../record')
 const Category = require('../category')
@@ -13,9 +15,17 @@ db.once('open', () => {
 
     Promise
         .all(Array.from(UserList, (_, i) => {
-            return User.create({
-                name: UserList[i].name
-            })
+            return bcrypt.genSalt(10)
+                .then(salt => bcrypt.hash(UserList[i].password, salt))
+                .then(hash => User.create({
+                    name: UserList[i].name,
+                    email: UserList[i].email,
+                    password: hash
+                }))
+            // return User.create({
+            //     name: UserList[i].name,
+            //     email: UserList[i].email
+            // })
         }))
         .then(() => {
             console.log('Insert user data.')
