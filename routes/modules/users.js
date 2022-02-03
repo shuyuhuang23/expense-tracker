@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+const passport = require('passport')
 const bcrypt = require('bcryptjs')
 
 // const Record = require('../../models/record')
@@ -14,6 +15,11 @@ router.get('/login', (req, res) => {
 router.get('/register', (req, res) => {
     res.render('register')
 })
+
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login'
+}))
 
 router.post('/register', (req, res) => {
     const { name, email, password, confirmPassword } = req.body
