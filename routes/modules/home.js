@@ -5,6 +5,9 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 router.get('/', (req, res) => {
+    const userId = req.user._id
+    console.log(userId)
+
     const categoryNames = []
     const recordsInfo = []
     const categorySortName = req.query.category_bar || '類別'
@@ -14,7 +17,7 @@ router.get('/', (req, res) => {
             categories.filter(category => {
                 categoryNames.push(category.name)
             })
-            Record.find()
+            Record.find({ userId })
                 .populate('categoryId')
                 .sort({ date: 'desc', id: 'asc' })
                 .lean()

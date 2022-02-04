@@ -27,9 +27,8 @@ router.post('/', (req, res) => {
         record.name = name
         record.date = date
         record.amount = Number(amount)
-        // record.userId = req.user._id
-        // TODO
-        record.userId = "61f515babd8e4c2e740a826f"
+        record.userId = req.user._id
+
 
         Category.findOne({ name: category })
             .then(item => {
@@ -37,8 +36,8 @@ router.post('/', (req, res) => {
             })
             .then(() => {
                 record.save()
+                res.redirect('/')
             })
-            .then(() => res.redirect('/'))
             .catch(err => console.log(err))
     } else {
         const filterCategoryName = []
@@ -58,9 +57,10 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:record_id/edit', (req, res) => {
+    const userId = req.user._id
     const recordId = req.params.record_id
     const filterCategoryName = []
-    Record.findOne({ _id: recordId })
+    Record.findOne({ _id: recordId, userId })
         .populate('categoryId')
         .lean()
         .then(record => {
@@ -88,29 +88,59 @@ router.get('/:record_id/edit', (req, res) => {
 })
 
 router.put('/:record_id', (req, res) => {
+    const userId = req.user._id
     const recordId = req.params.record_id
+    const { name, date, amount, category } = req.body
 
-    //TODO: 檢查金額是否為數字
-    Record.findOne({ _id: recordId })
-        .then(record => {
-            record.name = req.body.name
-            record.date = req.body.date
-            record.amount = req.body.amount
-            Category.findOne({ name: req.body.category })
-                .then(category => {
-                    record.categoryId = category._id
-                    return record.save()
+    if (!isNaN(amount)) {
+        Record.findOne({ _id: recordId, userId })
+            .then(record => {
+                record.name = name
+                record.date = date
+                record.amount = amount
+                Category.findOne({ name: category })
+                    .then(category => {
+                        record.categoryId = category._id
+                        return record.save()
+                    })
+            })
+            .then(() => res.redirect('/'))
+            .catch(err => console.log(err))
+
+    } else {
+        const filterCategoryName = []
+
+        Category.find()
+            .lean()
+            .then(categories => {
+                categories.filter(categoryInfo => {
+                    if (categoryInfo.name !== category) {
+                        filterCategoryName.push(categoryInfo.name)
+                    }
                 })
-        })
-        .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
 
+                Record.findOne({ _id: recordId, userId })
+                    .populate('categoryId')
+                    .lean()
+                    .then(record => {
+                        const revisedRecord = {
+                            name: req.body.name,
+                            date: req.body.date,
+                            amount: record.amount,
+                            category: req.body.category,
+                            _id: record._id
+                        }
+                        console.log(revisedRecord)
+                        res.render('edit', { record: revisedRecord, categories: filterCategoryName })
+                    })
+            })
+    }
 })
 
 router.delete('/:record_id', (req, res) => {
+    const userId = req.user._id
     const recordId = req.params.record_id
-    console.log(recordId)
-    return Record.findOne({ _id: recordId })
+    return Record.findOne({ _id: recordId, userId })
         .then(record => record.remove())
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
