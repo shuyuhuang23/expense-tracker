@@ -6,7 +6,6 @@ const Category = require('../../models/category')
 
 router.get('/', (req, res) => {
     const userId = req.user._id
-    console.log(userId)
 
     const categoryNames = []
     const recordsInfo = []

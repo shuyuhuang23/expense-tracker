@@ -130,7 +130,6 @@ router.put('/:record_id', (req, res) => {
                             category: req.body.category,
                             _id: record._id
                         }
-                        console.log(revisedRecord)
                         res.render('edit', { record: revisedRecord, categories: filterCategoryName })
                     })
             })
